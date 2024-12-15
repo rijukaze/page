@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="https://rijukaze.github.io/catalog/icon.png" type="image/x-icon">
+  <title>RIJU KAZE</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.cdnfonts.com/css/aclonica" rel="stylesheet">
+  <style>
+	h1,h2{
+	font-family: 'Aclonica', sans-serif;
+	}
+  </style>
+</head>
+<body class="bg-orange-50">
+  <header class="bg-amber-900 text-white p-4">
+    <div class="container mx-auto text-center">
+      <h1 class="text-4xl font-semibold mb-0">Loker IT</h1><h6 class="mx-0">(15 Desember 2024)</h6>
+      <img class="mt-3 h-7 mx-auto" src="https://rijukaze.github.io/catalog/logo-white.png">
+    </div>
+  </header>
+  <section class="py-8">
+    <div class="container mx-auto px-4 text-center">
+      <h6 class="mb-0">Detail Loker hubungi IG: @rijukaze</h6>
+      <h6 class="mb-5">Lokasi Kerja Jakarta - Tangerang</h6>
+      <div id="list" class="text-center">
+      </div>
+    </div>
+  </section>
+  <footer class="bg-stone-800 p-4 text-white text-center py-4 w-full">
+    <p>&copy; 2024 
+	<a href="https://www.instagram.com/rijukaze/" class="text-white" target="_blank">@rijukaze</a>
+    </p>
+  </footer>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+var data = [
+{
+  posisi:"Quality Assurance (Junior & Middle)",ketentuan:"Berpengalaman sebagai Manual/Automation Tester"
+},
+{
+  posisi:"Quality Assurance (Middle to Senior)",ketentuan:"Berpengalaman minimal 4 tahun sebagai Manual/Automation Tester"
+},
+{
+  posisi:"Java Backend Developer (Junior)",ketentuan:"Berpengalaman sebagai Java Developer menggunakan Springboot/Quarkus"
+},
+{
+  posisi:"Java Backend Developer (Middle)",ketentuan:"Berpengalaman sebagai Java Developer menggunakan Springboot/Quarkus"
+},
+{
+  posisi:".Net Backend Developer (Junior)",ketentuan:"Berpengalaman sebagai Java Developer menggunakan .Net MVC/.NET API"
+},
+{
+  posisi:"Golang Backend Developer (Junior)",ketentuan:"Berpengalaman sebagai Java Developer menggunakan Gin Gonic/Gorilla"
+},
+{
+  posisi:"IT Project Manager (Middle)",ketentuan:"Berpengalaman sebagai Project Manager dan Programmer"
+},
+{
+  posisi:"Product Owner (Middle)",ketentuan:"Berpengalaman sebagai Product Owner/Project Manager dan Programmer"
+},
+{
+  posisi:"Backend Developer Lead",ketentuan:"Berpengalaman sebagai Backend Developer Lead dan Programmer Springboot/Quarkus"
+},
+{
+  posisi:"Frontend Developer (Middle)",ketentuan:"Berpengalaman minimal 2 tahun sebagai Frontend Developer React JS/React Native"
+}
+];
+console.log(data)
+data.sort((a, b) => a.posisi.localeCompare(b.posisi));
+
+html='<table class="w-full table-auto border-collapse bg-white">'
+  +'<thead>'
+  +'  <tr class="bg-amber-900 text-white">'
+  +'    <th class="px-4 py-2 text-center border-b">No</th>'
+  +'    <th class="px-4 py-2 text-center border-b">Posisi</th>'
+  +'    <th class="px-4 py-2 text-center border-b">Ketentuan</th>'
+  +'  </tr>'
+  +'</thead>'
+  +'<tbody>';
+
+no=0;
+for(var i = 0; i < data.length; i++){
+no++
+html+='<tr class="hover:bg-gray-100">'
+      +'<td class="text-left align-top px-4 py-2 border-b">'+no+'</td>'
+      +'<td class="text-left align-top px-4 py-2 border-b">'+data[i].posisi+'</td>'
+      +'<td class="text-left align-top px-4 py-2 border-b">'+data[i].ketentuan+'</td>'
+      +'</tr>';
+}
+
+html+='</tbody></table>';
+$("#list").html(html);
+
+</script>
+</html>
