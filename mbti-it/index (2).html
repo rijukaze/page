@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="icon.png" type="image/x-icon">
+  <title>RIJU KAZE</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.cdnfonts.com/css/aclonica" rel="stylesheet">
+  <style>
+	h1,h2{
+	font-family: 'Aclonica', sans-serif;
+	}
+  </style>
+</head>
+<body class="bg-orange-50">
+  <header class="bg-amber-900 text-white p-4">
+    <div class="container mx-auto text-center">
+      <h1 class="text-4xl font-semibold mb-0">Job IT</h1><h6 class="mx-0">(Berdasarkan MBTI)</h6>
+      <img class="mt-3 h-7 mx-auto" src="logo-white.png">
+    </div>
+  </header>
+  <section class="py-8">
+    <div class="container mx-auto px-4 text-center">
+      <select id="m" class="m-1 w-32 text-sm p-2 border border-gray-300 rounded-lg bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-500 hover:bg-amber-100">
+        <option value="">Pilih</option>
+        <option value="E">(E) Extrovert</option>
+        <option value="I">(I) Introvert</option>
+      </select>
+      <select id="b" class="m-1 w-32 text-sm p-2 border border-gray-300 rounded-lg bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-500 hover:bg-amber-100">
+        <option value="">Pilih</option>
+        <option value="S">(S) Sensing</option>
+        <option value="N">(N) Intuition</option>
+      </select>
+      <select id="t" class="m-1 w-32 text-sm p-2 border border-gray-300 rounded-lg bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-500 hover:bg-amber-100">
+        <option value="">Pilih</option>
+        <option value="T">(T) Thinking</option>
+        <option value="F">(F) Feeling</option>
+      </select>
+      <select id="i" class="m-1 w-32 text-sm p-2 border border-gray-300 rounded-lg bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-500 hover:bg-amber-100">
+        <option value="">Pilih</option>
+        <option value="J">(J) Judging</option>
+        <option value="P">(P) Perceiving</option>
+      </select>
+      <br>
+      <button onclick="return result()" class="m-1 mb-3 bg-amber-900 text-white py-2 px-4 rounded hover:bg-amber-100 hover:border hover:border-amber-900 hover:text-amber-900">Show Result</button>
+      <div id="list" class="text-center">
+      </div>
+    </div>
+  </section>
+  <footer class="bg-stone-800 p-4 text-white text-center py-4 w-full">
+    <p>&copy; 2024 
+	<a href="https://www.instagram.com/rijukaze/" class="text-white" target="_blank">@rijukaze</a>
+    </p>
+  </footer>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+var data = [
+{posisi:"Software Engineer", deskripsi:"Bertanggung jawab untuk merancang, mengembangkan, dan memelihara perangkat lunak.",mbti:"INTP, INTJ, ISTP"},
+{posisi:"Web Developer", deskripsi:"Mengembangkan dan memelihara situs web serta aplikasi berbasis web.",mbti:"ENFP, ISTP, ISFJ"},
+{posisi:"Systems Administrator", deskripsi:"Mengelola dan memelihara sistem komputer dan jaringan di perusahaan.",mbti:"ESTJ, ISTJ, INTJ"},
+{posisi:"Network Engineer", deskripsi:"Bertanggung jawab untuk merancang dan mengelola infrastruktur jaringan.",mbti:"ENTJ, ESTJ, ISTJ"},
+{posisi:"Data Analyst", deskripsi:"Mengumpulkan, memproses, dan menganalisis data untuk laporan dan keputusan bisnis.",mbti:"INTJ, INTP, ISTJ"},
+{posisi:"Data Scientist", deskripsi:"Menganalisis dan menginterpretasi data besar untuk membuat prediksi dan keputusan berbasis data.",mbti:"INTP, INTJ, ENTP"},
+{posisi:"IT Support Specialist", deskripsi:"Memberikan dukungan teknis kepada pengguna dan memecahkan masalah perangkat keras dan perangkat lunak.",mbti:"ESFJ, ISFJ, ESTJ"},
+{posisi:"Cloud Engineer", deskripsi:"Merancang dan mengelola infrastruktur cloud untuk perusahaan.",mbti:"ENTP, ENTJ, INTJ"},
+{posisi:"Cybersecurity Analyst", deskripsi:"Memastikan bahwa sistem dan data perusahaan aman dari ancaman.",mbti:"INTJ, ISTP, ESTJ"},
+{posisi:"Database Administrator", deskripsi:"Mengelola dan memelihara sistem database perusahaan.",mbti:"ISTJ, INTJ, INTP"},
+{posisi:"QA Engineer", deskripsi:"Menguji dan memastikan kualitas perangkat lunak melalui pengujian.",mbti:"ISTJ, INFP, INTJ"},
+{posisi:"Business Analyst", deskripsi:"Menganalisis proses bisnis dan mengidentifikasi kebutuhan untuk solusi teknologi.",mbti:"ENFJ, ENTJ, INFJ"},
+{posisi:"Product Manager", deskripsi:"Mengelola siklus hidup produk dari pengembangan hingga peluncuran.",mbti:"ENFJ, ENTJ, ESTJ"},
+{posisi:"DevOps Engineer", deskripsi:"Menggabungkan pengembangan perangkat lunak dan operasi untuk meningkatkan alur kerja dan pengiriman perangkat lunak.",mbti:"ENTP, ESTJ, INTJ"},
+{posisi:"Mobile App Developer", deskripsi:"Mengembangkan aplikasi untuk perangkat mobile (Android/iOS).",mbti:"ENFP, ISFP, ISTP"},
+{posisi:"Game Developer", deskripsi:"Menciptakan dan mengembangkan permainan komputer dan video.",mbti:"ENFP, INFP, ISTP"},
+{posisi:"Artificial Intelligence Engineer", deskripsi:"Membangun sistem AI yang dapat belajar dan menyesuaikan diri dengan data.",mbti:"INTJ, ENTP, INTP"},
+{posisi:"IT Project Manager", deskripsi:"Mengelola proyek teknologi dari awal hingga selesai.",mbti:"ENFJ, ESTJ, ENTJ"},
+{posisi:"Systems Analyst", deskripsi:"Menganalisis dan merancang solusi teknologi untuk perusahaan.",mbti:"INTJ, INFP, ENFJ"},
+{posisi:"Embedded Systems Engineer", deskripsi:"Mengembangkan sistem perangkat lunak untuk perangkat keras embedded.",mbti:"ISTP, INTJ, INTP"},
+{posisi:"IT Director", deskripsi:"Bertanggung jawab atas pengelolaan dan strategi teknologi perusahaan.",mbti:"ENTJ, ESTJ, ENFJ"},
+{posisi:"Blockchain Developer", deskripsi:"Mengembangkan aplikasi dan solusi berbasis teknologi blockchain.",mbti:"INTP, ENTJ, ISTP"},
+{posisi:"IT Consultant", deskripsi:"Memberikan saran kepada perusahaan terkait kebutuhan teknologi.",mbti:"ENFJ, ENTJ, INTP"},
+{posisi:"Network Administrator", deskripsi:"Mengelola jaringan komputer dalam organisasi.",mbti:"ESTJ, ISTJ, ENTP"},
+{posisi:"Digital Marketing Specialist", deskripsi:"Menggunakan teknologi untuk memasarkan produk dan layanan melalui platform digital.",mbti:"ENFP, ESFJ, ESTP"},
+{posisi:"UI/UX Designer", deskripsi:"Merancang antarmuka pengguna yang intuitif dan pengalaman pengguna yang baik.",mbti:"INFP, ISFP, ENFP"},
+{posisi:"Cloud Architect", deskripsi:"Merancang arsitektur sistem cloud untuk kebutuhan perusahaan.",mbti:"INTJ, ENTP, ENTJ"},
+{posisi:"Security Engineer", deskripsi:"Merancang dan mengimplementasikan solusi untuk mengamankan data dan sistem.",mbti:"INTJ, ISTP, ENTP"},
+{posisi:"IT Trainer", deskripsi:"Mengajarkan keterampilan teknis kepada individu atau kelompok.",mbti:"ENFJ, ESFJ, ISFJ"},
+{posisi:"Virtualization Engineer", deskripsi:"Mengelola sistem virtualisasi seperti VMware, Hyper-V, dan lainnya.",mbti:"INTJ, ISTP, ESTJ"},
+{posisi:"Application Architect", deskripsi:"Merancang arsitektur perangkat lunak untuk aplikasi perusahaan.",mbti:"INTJ, ENTJ, INTP"},
+{posisi:"Full Stack Developer", deskripsi:"Mengembangkan aplikasi dari frontend hingga backend.",mbti:"ENTP, ISTP, INTJ"},
+{posisi:"IT Auditor", deskripsi:"Memeriksa dan mengevaluasi sistem teknologi dan keamanannya.",mbti:"INTJ, ISTJ, ENTP"},
+{posisi:"Scrum Master", deskripsi:"Memimpin tim pengembangan perangkat lunak menggunakan metodologi Scrum.",mbti:"ENFJ, ESTJ, ENTJ"},
+{posisi:"IT Security Consultant", deskripsi:"Memberikan nasihat terkait perlindungan data dan keamanan sistem.",mbti:"INTJ, ISTP, ENTP"},
+{posisi:"Automation Engineer", deskripsi:"Merancang dan mengimplementasikan sistem otomatisasi untuk proses teknologi.",mbti:"ENTP, ESTP, INTJ"},
+{posisi:"Data Engineer", deskripsi:"Merancang dan membangun sistem yang mengumpulkan dan mengolah data besar.",mbti:"INTJ, INTP, ISTJ"},
+{posisi:"Software Architect", deskripsi:"Merancang struktur dan desain sistem perangkat lunak besar.",mbti:"INTJ, ENTP, ISTJ"},
+{posisi:"Technical Writer", deskripsi:"Menulis dokumentasi teknis dan panduan pengguna untuk perangkat lunak.",mbti:"INTJ, INFP, ISTJ"},
+{posisi:"SEO Specialist", deskripsi:"Mengoptimalkan situs web untuk mesin pencari seperti Google.",mbti:"ENFP, ESTP, ESFJ"},
+{posisi:"IT Operations Manager", deskripsi:"Mengelola kegiatan operasional teknologi dalam organisasi.",mbti:"ESTJ, ENTJ, INTJ"},
+{posisi:"AI Research Scientist", deskripsi:"Melakukan penelitian untuk mengembangkan teknologi kecerdasan buatan.",mbti:"INTP, INTJ, ENTP"},
+{posisi:"Network Security Engineer", deskripsi:"Bertanggung jawab untuk melindungi jaringan komputer dari ancaman.",mbti:"INTJ, ISTP, ENTP"},
+{posisi:"Software Tester", deskripsi:"Menguji aplikasi perangkat lunak untuk menemukan dan memperbaiki bug.",mbti:"ISTJ, INTP, INTJ"},
+{posisi:"ERP Consultant", deskripsi:"Membantu perusahaan dalam mengimplementasikan sistem ERP.",mbti:"ENFJ, ENTJ, ISTJ"},
+{posisi:"IT Infrastructure Manager", deskripsi:"Mengelola infrastruktur teknologi informasi perusahaan.",mbti:"ESTJ, ENTJ, INTJ"},
+{posisi:"CRM Developer", deskripsi:"Mengembangkan dan mengelola sistem manajemen hubungan pelanggan (CRM).",mbti:"INTJ, INFP, ENTP"},
+{posisi:"Business Intelligence Developer", deskripsi:"Membangun sistem untuk menganalisis dan melaporkan data perusahaan.",mbti:"INTJ, INTP, ENTJ"},
+{posisi:"SAP Consultant", deskripsi:"Menyediakan konsultasi dan dukungan terkait sistem SAP.",mbti:"INTJ, ENFJ, ESTJ"},
+{posisi:"IT Procurement Specialist", deskripsi:"Mengelola pembelian perangkat keras dan perangkat lunak untuk perusahaan.",mbti:"ESTJ, ISTJ, ENFJ"},
+{posisi:"Web Designer", deskripsi:"Merancang desain visual dan pengalaman pengguna untuk situs web.",mbti:"INFP, ISFP, ENFP"},
+{posisi:"Software Development Manager", deskripsi:"Mengelola tim pengembang perangkat lunak untuk proyek besar.",mbti:"ENTJ, ENFJ, ESTJ"},
+{posisi:"IT Business Partner", deskripsi:"Bekerja dengan pemangku kepentingan bisnis untuk memenuhi kebutuhan teknologi.",mbti:"ENFJ, ENTJ, INFJ"},
+{posisi:"Penetration Tester", deskripsi:"Menguji sistem untuk mengidentifikasi kerentanannya.",mbti:"ISTP, INTJ, ENTP"},
+{posisi:"Technology Evangelist", deskripsi:"Mempromosikan teknologi baru dan membangun komunitas pengguna.",mbti:"ENFP, ENFJ, ENTJ"},
+{posisi:"IT Risk Manager", deskripsi:"Mengidentifikasi dan mengelola risiko yang terkait dengan teknologi.",mbti:"INTJ, ISTJ, ENTJ"},
+{posisi:"Blockchain Architect", deskripsi:"Merancang sistem berbasis blockchain untuk aplikasi tertentu.",mbti:"INTJ, INTP, ENTP"},
+{posisi:"Systems Integration Engineer", deskripsi:"Mengintegrasikan berbagai sistem dan perangkat lunak dalam organisasi.",mbti:"INTJ, ISTP, ESTJ"},
+{posisi:"Digital Transformation Specialist", deskripsi:"Membantu organisasi dalam mengadopsi teknologi baru untuk meningkatkan operasi.",mbti:"ENFJ, ENTJ, INTJ"},
+{posisi:"IT Recruiter", deskripsi:"Mencari dan melakukan proses rekrutmen untuk karyawan dengan posisi IT",mbti:"INFJ"}
+];
+
+function result(){
+html='<table class="w-full table-auto border-collapse bg-white">'
+  +'<thead>'
+  +'  <tr class="bg-amber-900 text-white">'
+  +'    <th class="px-4 py-2 text-center border-b">No</th>'
+  +'    <th class="px-4 py-2 text-center border-b">Posisi</th>'
+  +'    <th class="px-4 py-2 text-center border-b">Deskripsi</th>'
+  +'  </tr>'
+  +'</thead>'
+  +'<tbody>';
+var mbti = $("#m").val()+$("#b").val()+$("#t").val()+$("#i").val();
+if(mbti.length!=4){
+   alert("Silahkan lengkapi MBTI");
+   return;
+}
+no=0;
+for(var i = 0; i < data.length; i++){
+if(data[i].mbti.includes(mbti)){
+no++
+html+='<tr class="hover:bg-gray-100">'
+      +'<td class="text-left align-top px-4 py-2 border-b">'+no+'</td>'
+      +'<td class="text-left align-top px-4 py-2 border-b">'+data[i].posisi+'</td>'
+      +'<td class="text-left align-top px-4 py-2 border-b">'+data[i].deskripsi+'</td>'
+      +'</tr>';
+}
+}
+html+='</tbody></table>';
+$("#list").html(html);
+}
+</script>
+</html>
