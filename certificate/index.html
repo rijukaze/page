@@ -24,7 +24,7 @@
   </header>
   <section class="py-8 flex-grow">
     <div class="container mx-auto px-4 text-center">
-      <div class="mx-auto w-full sm:w-full md:w-1/4 lg:w-1/4">
+      <div id="page" class="mx-auto w-full sm:w-full md:w-1/4 lg:w-1/4">
 	 <p>Diberikan Kepada:</p>
 	 <h2 id="nama" class="text-2xl mb-0">Nama Lengkap Peserta</h2>
 	 <p>Sebagai:</p>
@@ -58,10 +58,14 @@ const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 var hasil = data.find(item => item.id === id);
 
-$("#nama").html(hasil.nama);
-$("#status").html(hasil.status);
-$("#acara").html(hasil.acara);
-$("#link").attr("href",hasil.link);
+if(hasil){
+  $("#nama").html(hasil.nama);
+  $("#status").html(hasil.status);
+  $("#acara").html(hasil.acara);
+  $("#link").attr("href",hasil.link);
+}else{
+  $("#page").html('<h1 class="text-5xl mt-5 pt-5 mb-0">Certificate Not Found</h1>');
+}
 
 </script>
 </html>
